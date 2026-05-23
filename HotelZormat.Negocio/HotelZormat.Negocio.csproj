@@ -45,6 +45,7 @@
     <Compile Include="Modelo\Habitacion.cs" />
     <Compile Include="Modelo\Huesped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\ReservasService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HotelZormatDatos\HotelZormat.Datos.csproj">
@@ -52,5 +53,6 @@
       <Name>HotelZormat.Datos</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
