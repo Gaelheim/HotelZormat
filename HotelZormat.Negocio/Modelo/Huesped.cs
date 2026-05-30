@@ -20,6 +20,7 @@ namespace HotelZormat.Negocio.Modelo
         public string NombreCompleto()
         {
             return Nombre + " " + Apellido;
+
         }
 
     }
