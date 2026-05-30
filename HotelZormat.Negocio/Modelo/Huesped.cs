@@ -8,7 +8,7 @@ namespace HotelZormat.Negocio.Modelo
 {
     public class Huesped
     {
-        public int Id {  get; set; }
+        public int Id {  get; set; } 
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string TipoDocumento { get; set; } //Cedula o Pasaporte
