@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.GbxTipoHabitacion = new System.Windows.Forms.GroupBox();
+            this.lblIcono = new System.Windows.Forms.Label();
             this.lblTarifa = new System.Windows.Forms.Label();
             this.CbxTipo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.cbxAccion = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblIcono = new System.Windows.Forms.Label();
             this.GbxTipoHabitacion.SuspendLayout();
             this.GbxBuscarHabitacion.SuspendLayout();
             this.GbxPiso3.SuspendLayout();
@@ -70,13 +70,22 @@
             this.GbxTipoHabitacion.Controls.Add(this.label2);
             this.GbxTipoHabitacion.Controls.Add(this.label1);
             this.GbxTipoHabitacion.Location = new System.Drawing.Point(9, 10);
-            this.GbxTipoHabitacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxTipoHabitacion.Margin = new System.Windows.Forms.Padding(2);
             this.GbxTipoHabitacion.Name = "GbxTipoHabitacion";
-            this.GbxTipoHabitacion.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxTipoHabitacion.Padding = new System.Windows.Forms.Padding(2);
             this.GbxTipoHabitacion.Size = new System.Drawing.Size(150, 114);
             this.GbxTipoHabitacion.TabIndex = 0;
             this.GbxTipoHabitacion.TabStop = false;
             this.GbxTipoHabitacion.Text = "Tipo de habitación";
+            // 
+            // lblIcono
+            // 
+            this.lblIcono.AutoSize = true;
+            this.lblIcono.Location = new System.Drawing.Point(45, 54);
+            this.lblIcono.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblIcono.Name = "lblIcono";
+            this.lblIcono.Size = new System.Drawing.Size(0, 13);
+            this.lblIcono.TabIndex = 5;
             // 
             // lblTarifa
             // 
@@ -92,7 +101,7 @@
             // 
             this.CbxTipo.FormattingEnabled = true;
             this.CbxTipo.Location = new System.Drawing.Point(42, 22);
-            this.CbxTipo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CbxTipo.Margin = new System.Windows.Forms.Padding(2);
             this.CbxTipo.Name = "CbxTipo";
             this.CbxTipo.Size = new System.Drawing.Size(92, 21);
             this.CbxTipo.TabIndex = 4;
@@ -135,9 +144,9 @@
             this.GbxBuscarHabitacion.Controls.Add(this.LblEstadoHabitacion);
             this.GbxBuscarHabitacion.Controls.Add(this.label4);
             this.GbxBuscarHabitacion.Location = new System.Drawing.Point(176, 10);
-            this.GbxBuscarHabitacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxBuscarHabitacion.Margin = new System.Windows.Forms.Padding(2);
             this.GbxBuscarHabitacion.Name = "GbxBuscarHabitacion";
-            this.GbxBuscarHabitacion.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxBuscarHabitacion.Padding = new System.Windows.Forms.Padding(2);
             this.GbxBuscarHabitacion.Size = new System.Drawing.Size(178, 114);
             this.GbxBuscarHabitacion.TabIndex = 1;
             this.GbxBuscarHabitacion.TabStop = false;
@@ -147,17 +156,18 @@
             // 
             this.btnBuscar.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnBuscar.Location = new System.Drawing.Point(109, 19);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(65, 19);
             this.btnBuscar.TabIndex = 4;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // tbxNumeroHabitacion
             // 
             this.tbxNumeroHabitacion.Location = new System.Drawing.Point(47, 20);
-            this.tbxNumeroHabitacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbxNumeroHabitacion.Margin = new System.Windows.Forms.Padding(2);
             this.tbxNumeroHabitacion.Name = "tbxNumeroHabitacion";
             this.tbxNumeroHabitacion.Size = new System.Drawing.Size(57, 20);
             this.tbxNumeroHabitacion.TabIndex = 4;
@@ -196,9 +206,9 @@
             // 
             this.GbxPiso3.Controls.Add(this.lbxHabitacionPiso3);
             this.GbxPiso3.Location = new System.Drawing.Point(368, 10);
-            this.GbxPiso3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxPiso3.Margin = new System.Windows.Forms.Padding(2);
             this.GbxPiso3.Name = "GbxPiso3";
-            this.GbxPiso3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxPiso3.Padding = new System.Windows.Forms.Padding(2);
             this.GbxPiso3.Size = new System.Drawing.Size(150, 114);
             this.GbxPiso3.TabIndex = 2;
             this.GbxPiso3.TabStop = false;
@@ -208,7 +218,7 @@
             // 
             this.lbxHabitacionPiso3.FormattingEnabled = true;
             this.lbxHabitacionPiso3.Location = new System.Drawing.Point(4, 17);
-            this.lbxHabitacionPiso3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lbxHabitacionPiso3.Margin = new System.Windows.Forms.Padding(2);
             this.lbxHabitacionPiso3.Name = "lbxHabitacionPiso3";
             this.lbxHabitacionPiso3.Size = new System.Drawing.Size(142, 82);
             this.lbxHabitacionPiso3.TabIndex = 0;
@@ -220,9 +230,9 @@
             this.GbxAcciones.Controls.Add(this.btnCheckIn);
             this.GbxAcciones.Controls.Add(this.btnReservar);
             this.GbxAcciones.Location = new System.Drawing.Point(9, 128);
-            this.GbxAcciones.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxAcciones.Margin = new System.Windows.Forms.Padding(2);
             this.GbxAcciones.Name = "GbxAcciones";
-            this.GbxAcciones.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxAcciones.Padding = new System.Windows.Forms.Padding(2);
             this.GbxAcciones.Size = new System.Drawing.Size(508, 54);
             this.GbxAcciones.TabIndex = 2;
             this.GbxAcciones.TabStop = false;
@@ -233,7 +243,7 @@
             // 
             this.BtnLimpieza.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.BtnLimpieza.Location = new System.Drawing.Point(402, 17);
-            this.BtnLimpieza.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnLimpieza.Margin = new System.Windows.Forms.Padding(2);
             this.BtnLimpieza.Name = "BtnLimpieza";
             this.BtnLimpieza.Size = new System.Drawing.Size(102, 19);
             this.BtnLimpieza.TabIndex = 3;
@@ -244,7 +254,7 @@
             // 
             this.btnCheckOut.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnCheckOut.Location = new System.Drawing.Point(275, 17);
-            this.btnCheckOut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCheckOut.Margin = new System.Windows.Forms.Padding(2);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(86, 19);
             this.btnCheckOut.TabIndex = 2;
@@ -255,7 +265,7 @@
             // 
             this.btnCheckIn.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnCheckIn.Location = new System.Drawing.Point(147, 17);
-            this.btnCheckIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCheckIn.Margin = new System.Windows.Forms.Padding(2);
             this.btnCheckIn.Name = "btnCheckIn";
             this.btnCheckIn.Size = new System.Drawing.Size(79, 19);
             this.btnCheckIn.TabIndex = 1;
@@ -266,7 +276,7 @@
             // 
             this.btnReservar.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnReservar.Location = new System.Drawing.Point(7, 17);
-            this.btnReservar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReservar.Margin = new System.Windows.Forms.Padding(2);
             this.btnReservar.Name = "btnReservar";
             this.btnReservar.Size = new System.Drawing.Size(95, 19);
             this.btnReservar.TabIndex = 0;
@@ -280,9 +290,9 @@
             this.GbxGuardarConfirmar.Controls.Add(this.cbxAccion);
             this.GbxGuardarConfirmar.Controls.Add(this.label7);
             this.GbxGuardarConfirmar.Location = new System.Drawing.Point(9, 202);
-            this.GbxGuardarConfirmar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxGuardarConfirmar.Margin = new System.Windows.Forms.Padding(2);
             this.GbxGuardarConfirmar.Name = "GbxGuardarConfirmar";
-            this.GbxGuardarConfirmar.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GbxGuardarConfirmar.Padding = new System.Windows.Forms.Padding(2);
             this.GbxGuardarConfirmar.Size = new System.Drawing.Size(508, 75);
             this.GbxGuardarConfirmar.TabIndex = 3;
             this.GbxGuardarConfirmar.TabStop = false;
@@ -292,29 +302,31 @@
             // 
             this.btnGuardarCambios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnGuardarCambios.Location = new System.Drawing.Point(351, 31);
-            this.btnGuardarCambios.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnGuardarCambios.Margin = new System.Windows.Forms.Padding(2);
             this.btnGuardarCambios.Name = "btnGuardarCambios";
             this.btnGuardarCambios.Size = new System.Drawing.Size(146, 19);
             this.btnGuardarCambios.TabIndex = 7;
             this.btnGuardarCambios.Text = "Guardar Cambios";
             this.btnGuardarCambios.UseVisualStyleBackColor = false;
+            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
             // 
             // btnConfirmar
             // 
             this.btnConfirmar.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnConfirmar.Location = new System.Drawing.Point(211, 31);
-            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(68, 19);
             this.btnConfirmar.TabIndex = 6;
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = false;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // cbxAccion
             // 
             this.cbxAccion.FormattingEnabled = true;
             this.cbxAccion.Location = new System.Drawing.Point(42, 28);
-            this.cbxAccion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxAccion.Margin = new System.Windows.Forms.Padding(2);
             this.cbxAccion.Name = "cbxAccion";
             this.cbxAccion.Size = new System.Drawing.Size(150, 21);
             this.cbxAccion.TabIndex = 5;
@@ -329,15 +341,6 @@
             this.label7.TabIndex = 3;
             this.label7.Text = "Acción";
             // 
-            // lblIcono
-            // 
-            this.lblIcono.AutoSize = true;
-            this.lblIcono.Location = new System.Drawing.Point(45, 54);
-            this.lblIcono.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblIcono.Name = "lblIcono";
-            this.lblIcono.Size = new System.Drawing.Size(0, 13);
-            this.lblIcono.TabIndex = 5;
-            // 
             // FrmGestionHabitaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,7 +352,7 @@
             this.Controls.Add(this.GbxBuscarHabitacion);
             this.Controls.Add(this.GbxTipoHabitacion);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FrmGestionHabitaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
