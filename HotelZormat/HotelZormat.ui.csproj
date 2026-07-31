@@ -64,11 +64,35 @@
     <Compile Include="FrmGestionHabitaciones.Designer.cs">
       <DependentUpon>FrmGestionHabitaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmHuespedes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHuespedes.Designer.cs">
+      <DependentUpon>FrmHuespedes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReportes.Designer.cs">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReservas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReservas.Designer.cs">
+      <DependentUpon>FrmReservas.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +128,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HotelZormat.Modelo\HotelZormat.Modelos.csproj">
+      <Project>{d712999c-5189-4bcf-bb77-349e71f5cd12}</Project>
+      <Name>HotelZormat.Modelos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HotelZormat.Negocio\HotelZormat.Negocio.csproj">
       <Project>{a928d5ee-0e7a-4955-9a5a-672d21d5ddb2}</Project>
       <Name>HotelZormat.Negocio</Name>

@@ -1,10 +1,12 @@
-﻿using HotelZormat.Negocio.Modelo;
+﻿using HotelZormat.Negocio;
+using HotelZormat.Modelos;
 using System;
 using System.Windows.Forms;
 
 namespace HotelZormat
 {
-    /// <summary>Muestra en pantalla el desglose de la factura generada al cerrar una estadía (Check-Out).</summary>
+    //40232840757
+    //Muestra en pantalla el desglose de la factura generada al cerrar una estadía (Check-Out).
     public partial class FrmFactura : Form
     {
         public FrmFactura(Factura factura)

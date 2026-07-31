@@ -13,7 +13,7 @@ namespace HotelZormatDatos.Repositorios
     public class ReporteRepositorio
     {
         
-        {
+        
             //Reporte 1: ocupación del día, vía la vista vw_OcupacionDelDia.
             public DataTable OcupacionDelDia()
             {

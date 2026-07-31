@@ -54,11 +54,21 @@
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.cbxAccion = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.GbxCrudHabitacion = new System.Windows.Forms.GroupBox();
+            this.txtNumeroCrud = new System.Windows.Forms.TextBox();
+            this.lblNumeroCrud = new System.Windows.Forms.Label();
+            this.txtPisoCrud = new System.Windows.Forms.TextBox();
+            this.lblPisoCrud = new System.Windows.Forms.Label();
+            this.txtCapacidadCrud = new System.Windows.Forms.TextBox();
+            this.lblCapacidadCrud = new System.Windows.Forms.Label();
+            this.btnCrearHabitacion = new System.Windows.Forms.Button();
+            this.btnEliminarHabitacion = new System.Windows.Forms.Button();
             this.GbxTipoHabitacion.SuspendLayout();
             this.GbxBuscarHabitacion.SuspendLayout();
             this.GbxPiso3.SuspendLayout();
             this.GbxAcciones.SuspendLayout();
             this.GbxGuardarConfirmar.SuspendLayout();
+            this.GbxCrudHabitacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // GbxTipoHabitacion
@@ -341,11 +351,110 @@
             this.label7.TabIndex = 3;
             this.label7.Text = "Acción";
             // 
+            // GbxCrudHabitacion
+            // 
+            this.GbxCrudHabitacion.Controls.Add(this.txtNumeroCrud);
+            this.GbxCrudHabitacion.Controls.Add(this.lblNumeroCrud);
+            this.GbxCrudHabitacion.Controls.Add(this.txtPisoCrud);
+            this.GbxCrudHabitacion.Controls.Add(this.lblPisoCrud);
+            this.GbxCrudHabitacion.Controls.Add(this.txtCapacidadCrud);
+            this.GbxCrudHabitacion.Controls.Add(this.lblCapacidadCrud);
+            this.GbxCrudHabitacion.Controls.Add(this.btnCrearHabitacion);
+            this.GbxCrudHabitacion.Controls.Add(this.btnEliminarHabitacion);
+            this.GbxCrudHabitacion.Location = new System.Drawing.Point(9, 283);
+            this.GbxCrudHabitacion.Margin = new System.Windows.Forms.Padding(2);
+            this.GbxCrudHabitacion.Name = "GbxCrudHabitacion";
+            this.GbxCrudHabitacion.Padding = new System.Windows.Forms.Padding(2);
+            this.GbxCrudHabitacion.Size = new System.Drawing.Size(508, 75);
+            this.GbxCrudHabitacion.TabIndex = 4;
+            this.GbxCrudHabitacion.TabStop = false;
+            this.GbxCrudHabitacion.Text = "Nueva habitación ";
+            // 
+            // txtNumeroCrud
+            // 
+            this.txtNumeroCrud.Location = new System.Drawing.Point(56, 22);
+            this.txtNumeroCrud.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNumeroCrud.Name = "txtNumeroCrud";
+            this.txtNumeroCrud.Size = new System.Drawing.Size(60, 20);
+            this.txtNumeroCrud.TabIndex = 1;
+            // 
+            // lblNumeroCrud
+            // 
+            this.lblNumeroCrud.AutoSize = true;
+            this.lblNumeroCrud.Location = new System.Drawing.Point(4, 25);
+            this.lblNumeroCrud.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNumeroCrud.Name = "lblNumeroCrud";
+            this.lblNumeroCrud.Size = new System.Drawing.Size(47, 13);
+            this.lblNumeroCrud.TabIndex = 0;
+            this.lblNumeroCrud.Text = "Número:";
+            // 
+            // txtPisoCrud
+            // 
+            this.txtPisoCrud.Location = new System.Drawing.Point(160, 22);
+            this.txtPisoCrud.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPisoCrud.Name = "txtPisoCrud";
+            this.txtPisoCrud.Size = new System.Drawing.Size(40, 20);
+            this.txtPisoCrud.TabIndex = 3;
+            // 
+            // lblPisoCrud
+            // 
+            this.lblPisoCrud.AutoSize = true;
+            this.lblPisoCrud.Location = new System.Drawing.Point(126, 25);
+            this.lblPisoCrud.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPisoCrud.Name = "lblPisoCrud";
+            this.lblPisoCrud.Size = new System.Drawing.Size(30, 13);
+            this.lblPisoCrud.TabIndex = 2;
+            this.lblPisoCrud.Text = "Piso:";
+            // 
+            // txtCapacidadCrud
+            // 
+            this.txtCapacidadCrud.Location = new System.Drawing.Point(272, 22);
+            this.txtCapacidadCrud.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCapacidadCrud.Name = "txtCapacidadCrud";
+            this.txtCapacidadCrud.Size = new System.Drawing.Size(40, 20);
+            this.txtCapacidadCrud.TabIndex = 5;
+            // 
+            // lblCapacidadCrud
+            // 
+            this.lblCapacidadCrud.AutoSize = true;
+            this.lblCapacidadCrud.Location = new System.Drawing.Point(206, 25);
+            this.lblCapacidadCrud.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCapacidadCrud.Name = "lblCapacidadCrud";
+            this.lblCapacidadCrud.Size = new System.Drawing.Size(61, 13);
+            this.lblCapacidadCrud.TabIndex = 4;
+            this.lblCapacidadCrud.Text = "Capacidad:";
+            // 
+            // btnCrearHabitacion
+            // 
+            this.btnCrearHabitacion.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnCrearHabitacion.Location = new System.Drawing.Point(320, 20);
+            this.btnCrearHabitacion.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCrearHabitacion.Name = "btnCrearHabitacion";
+            this.btnCrearHabitacion.Size = new System.Drawing.Size(85, 24);
+            this.btnCrearHabitacion.TabIndex = 6;
+            this.btnCrearHabitacion.Text = "Crear";
+            this.btnCrearHabitacion.UseVisualStyleBackColor = false;
+            this.btnCrearHabitacion.Click += new System.EventHandler(this.btnCrearHabitacion_Click);
+            // 
+            // btnEliminarHabitacion
+            // 
+            this.btnEliminarHabitacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
+            this.btnEliminarHabitacion.ForeColor = System.Drawing.Color.White;
+            this.btnEliminarHabitacion.Location = new System.Drawing.Point(411, 20);
+            this.btnEliminarHabitacion.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEliminarHabitacion.Name = "btnEliminarHabitacion";
+            this.btnEliminarHabitacion.Size = new System.Drawing.Size(91, 24);
+            this.btnEliminarHabitacion.TabIndex = 7;
+            this.btnEliminarHabitacion.Text = "Eliminar (buscada)";
+            this.btnEliminarHabitacion.UseVisualStyleBackColor = false;
+            this.btnEliminarHabitacion.Click += new System.EventHandler(this.btnEliminarHabitacion_Click);
+            // 
             // FrmGestionHabitaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 287);
+            this.ClientSize = new System.Drawing.Size(526, 367);
+            this.Controls.Add(this.GbxCrudHabitacion);
             this.Controls.Add(this.GbxGuardarConfirmar);
             this.Controls.Add(this.GbxAcciones);
             this.Controls.Add(this.GbxPiso3);
@@ -365,6 +474,8 @@
             this.GbxAcciones.ResumeLayout(false);
             this.GbxGuardarConfirmar.ResumeLayout(false);
             this.GbxGuardarConfirmar.PerformLayout();
+            this.GbxCrudHabitacion.ResumeLayout(false);
+            this.GbxCrudHabitacion.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -397,5 +508,14 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox tbxNumeroHabitacion;
         private System.Windows.Forms.Label lblIcono;
+        private System.Windows.Forms.GroupBox GbxCrudHabitacion;
+        private System.Windows.Forms.TextBox txtNumeroCrud;
+        private System.Windows.Forms.Label lblNumeroCrud;
+        private System.Windows.Forms.TextBox txtPisoCrud;
+        private System.Windows.Forms.Label lblPisoCrud;
+        private System.Windows.Forms.TextBox txtCapacidadCrud;
+        private System.Windows.Forms.Label lblCapacidadCrud;
+        private System.Windows.Forms.Button btnCrearHabitacion;
+        private System.Windows.Forms.Button btnEliminarHabitacion;
     }
 }

@@ -1,9 +1,10 @@
-﻿using HotelZormat.Negocio.Modelo;
-using HotelZormat.Negocio.Modelos;
+﻿using HotelZormat.Negocio;
+using HotelZormat.Negocio.Servicios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,18 +15,13 @@ namespace HotelZormat
 {
     public partial class FrmGestionHabitaciones : Form
     {
-        private Habitacion _habitacionActual;
+        private readonly HabitacionService _habitacionService = new HabitacionService();
+        private readonly ReservaService _reservaService = new ReservaService();
+        private readonly CheckInOutService _checkInOutService = new CheckInOutService();
 
-        // Datos de ejemplo en memoria (el día que conectemos a SQL Server, esto se reemplaza por una llamada a la capa Datos).
-        private List<Habitacion> habitaciones = new List<Habitacion>
-        {
-            new Habitacion { Id = 1, Numero = "301", Tipo = "Sencilla", Piso = 3, Capacidad = 1, TarifaBase = 1500m, Estado = "Disponible" },
-            new Habitacion { Id = 2, Numero = "302", Tipo = "Doble",    Piso = 3, Capacidad = 2, TarifaBase = 2500m, Estado = "Ocupada" },
-            new Habitacion { Id = 3, Numero = "303", Tipo = "Suite",    Piso = 3, Capacidad = 4, TarifaBase = 4500m, Estado = "Reservada" },
-            new Habitacion { Id = 4, Numero = "304", Tipo = "Sencilla", Piso = 3, Capacidad = 1, TarifaBase = 1500m, Estado = "Limpieza" },
-            new Habitacion { Id = 5, Numero = "201", Tipo = "Doble",    Piso = 2, Capacidad = 2, TarifaBase = 2500m, Estado = "Disponible" },
-            new Habitacion { Id = 6, Numero = "401", Tipo = "Suite",    Piso = 4, Capacidad = 4, TarifaBase = 4500m, Estado = "Ocupada" },
-        };
+        private Habitacion _habitacionActual;
+        private List<TipoHabitacion> _tipos = new List<TipoHabitacion>();
+        private List<Habitacion> _habitaciones = new List<Habitacion>();
 
         public FrmGestionHabitaciones()
         {
@@ -39,42 +35,67 @@ namespace HotelZormat
 
         private void FrmGestionHabitaciones_Load(object sender, EventArgs e)
         {
-            CbxTipo.Items.Clear();
-            var tipos = new List<string> { "Sencilla", "Doble", "Suite" };
-            foreach (var tipo in tipos)
+            try
             {
-                CbxTipo.Items.Add(tipo);
+                CargarTipos();
+                CargarHabitacionesPiso3();
+
+                cbxAccion.Items.Clear();
+                var acciones = new List<string> { "Reservar", "Check-In", "Check-Out", "Marcar Limpia" };
+                foreach (var accion in acciones)
+                {
+                    cbxAccion.Items.Add(accion);
+                }
+                if (cbxAccion.Items.Count > 0)
+                {
+                    cbxAccion.SelectedIndex = 0;
+                }
+
+                // Eliminar solo lo puede hacer el rol Administrador (PuedeEliminarHabitaciones = 1).
+                bool puedeEliminar = Sesion.UsuarioActual != null && Sesion.UsuarioActual.PuedeEliminarHabitaciones;
+                btnEliminarHabitacion.Enabled = puedeEliminar;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error de base de datos al cargar habitaciones: " + ex.Message,
+                    "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CargarTipos()
+        {
+            _tipos = _habitacionService.ListarTipos();
+
+            CbxTipo.Items.Clear();
+            // Reto 01 (foreach): llenado del combo a partir de la lista de tipos traída de la BD.
+            foreach (var tipo in _tipos)
+            {
+                CbxTipo.Items.Add(tipo.Nombre);
             }
             if (CbxTipo.Items.Count > 0)
             {
                 CbxTipo.SelectedIndex = 0; // dispara SelectedIndexChanged
             }
-
-            cbxAccion.Items.Clear();
-            var acciones = new List<string> { "Reservar", "Check-In", "Check-Out", "Marcar Limpia" };
-            foreach (var accion in acciones)
-            {
-                cbxAccion.Items.Add(accion);
-            }
-            if (cbxAccion.Items.Count > 0)
-            {
-                cbxAccion.SelectedIndex = 0;
-            }
-
-            CargarHabitacionesPiso3();
         }
 
         private void CargarHabitacionesPiso3()
         {
+            _habitaciones = _habitacionService.Listar(null, null);
+
             // Se limpia ANTES de recorrer: así, si el método se llama de
             // nuevo, la lista nunca queda duplicada.
             lbxHabitacionPiso3.Items.Clear();
 
-            foreach (Habitacion habitacion in habitaciones)
+            foreach (Habitacion habitacion in _habitaciones)
             {
                 if (habitacion.Piso == 3)
                 {
-                    string linea = habitacion.Numero + " - " + habitacion.Tipo;
+                    string linea = habitacion.Numero + " - " + habitacion.TipoHabitacionNombre;
                     lbxHabitacionPiso3.Items.Add(linea);
                 }
             }
@@ -115,17 +136,12 @@ namespace HotelZormat
 
         private decimal ObtenerTarifaPorTipo(string tipo)
         {
-            switch (tipo)
+            TipoHabitacion encontrado = _tipos.FirstOrDefault(t => t.Nombre == tipo);
+            if (encontrado == null)
             {
-                case "Sencilla":
-                    return 1500m;
-                case "Doble":
-                    return 2500m;
-                case "Suite":
-                    return 4500m;
-                default:
-                    throw new ArgumentException("Tipo de habitación no válido: " + tipo);
+                throw new ArgumentException("Tipo de habitación no válido: " + tipo);
             }
+            return encontrado.TarifaBase;
         }
 
         private void EstadoDeColor(string estado, Label etiqueta)
@@ -151,7 +167,6 @@ namespace HotelZormat
         }
         private void ConfigurarBotonesPorEstado(string estado)
         {
-            // Primero se apagan los 4; el switch solo prende el correcto.
             btnReservar.Enabled = false;
             btnCheckIn.Enabled = false;
             btnCheckOut.Enabled = false;
@@ -163,20 +178,28 @@ namespace HotelZormat
                     btnReservar.Enabled = true;
                     break;
                 case "Reservada":
-                    btnCheckIn.Enabled = true; // llega el huésped
+                    btnCheckIn.Enabled = true;
                     break;
                 case "Ocupada":
                     btnCheckOut.Enabled = true;
                     break;
                 case "Limpieza":
-                    BtnLimpieza.Enabled = true; // vuelve a Disponible
+                    BtnLimpieza.Enabled = true;
                     break;
                 default:
                     break;
             }
         }
+
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
+            if (_habitacionActual == null)
+            {
+                MessageBox.Show("Primero debe buscar una habitación.", "Habitación requerida",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string accion = cbxAccion.Text;
             string mensaje;
 
@@ -203,33 +226,108 @@ namespace HotelZormat
             DialogResult respuesta = MessageBox.Show(mensaje, "Confirmar acción",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (respuesta == DialogResult.Yes)
+            if (respuesta != DialogResult.Yes)
             {
-                MessageBox.Show("Acción confirmada.", "Confirmado",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            // Si responde "No", no pasa nada — permite arrepentirse.
+
+            try
+            {
+                EjecutarAccion(accion);
+            }
+            catch (HabitacionOcupadaException ex)
+            {
+                MessageBox.Show(ex.Message, "Habitación ocupada",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "No se pudo completar la acción",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void EjecutarAccion(string accion)
+        {
+            int usuarioId = Sesion.UsuarioActual != null ? Sesion.UsuarioActual.Id : 0;
+
+            switch (accion)
+            {
+                case "Reservar":
+                    using (var frm = new FrmReservas(_habitacionActual.Numero))
+                    {
+                        frm.ShowDialog(this);
+                    }
+                    break;
+
+                case "Check-In":
+                    Reserva confirmada = _reservaService.ObtenerConfirmadaPorHabitacion(_habitacionActual.Id);
+                    if (confirmada == null)
+                    {
+                        MessageBox.Show("No hay una reserva Confirmada para esta habitación.",
+                            "Check-In no disponible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    _checkInOutService.RealizarCheckIn(confirmada.Id, usuarioId);
+                    MessageBox.Show("Check-In registrado correctamente.", "Check-In",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+
+                case "Check-Out":
+                    Estadia activa = _checkInOutService.ObtenerActivaPorHabitacion(_habitacionActual.Id);
+                    if (activa == null)
+                    {
+                        MessageBox.Show("No hay una estadía activa para esta habitación.",
+                            "Check-Out no disponible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    Factura factura = _checkInOutService.RealizarCheckOut(activa.Id, usuarioId);
+                    using (var frmFactura = new FrmFactura(factura))
+                    {
+                        frmFactura.ShowDialog(this);
+                    }
+                    break;
+
+                case "Marcar Limpia":
+                    _habitacionService.MarcarLimpia(_habitacionActual.Id);
+                    MessageBox.Show("Habitación marcada como Disponible.", "Limpieza",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+            }
+
+            RecargarHabitacionActual();
+            CargarHabitacionesPiso3();
+        }
+
+        private void RecargarHabitacionActual()
+        {
+            if (_habitacionActual == null) return;
+            _habitacionActual = _habitacionService.ObtenerPorNumero(_habitacionActual.Numero);
+            if (_habitacionActual != null)
+            {
+                LblEstadoHabitacion.Text = "Estado: " + _habitacionActual.Estado;
+                EstadoDeColor(_habitacionActual.Estado, LblEstadoHabitacion);
+                ConfigurarBotonesPorEstado(_habitacionActual.Estado);
+            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
-                // Aunque Habitacion.Numero es string, validamos que lo
-                // escrito "parezca" un número real antes de buscar — así
-                // seguimos atrapando basura como "305a".
                 int numeroValidado = int.Parse(tbxNumeroHabitacion.Text);
                 string numeroBuscado = numeroValidado.ToString();
 
-                Habitacion encontrada = null;
-                foreach (Habitacion habitacion in habitaciones)
-                {
-                    if (habitacion.Numero == numeroBuscado)
-                    {
-                        encontrada = habitacion;
-                        break;
-                    }
-                }
+                Habitacion encontrada = _habitacionService.ObtenerPorNumero(numeroBuscado);
 
                 if (encontrada == null)
                 {
@@ -243,10 +341,9 @@ namespace HotelZormat
                 }
 
                 _habitacionActual = encontrada;
-                lblMensajeBusqueda.Text = encontrada.Tipo + " · Piso " + encontrada.Piso;
+                lblMensajeBusqueda.Text = encontrada.TipoHabitacionNombre + " · Piso " + encontrada.Piso;
                 LblEstadoHabitacion.Text = "Estado: " + encontrada.Estado;
 
-                // Reutiliza los métodos de los PASOS 5 y 6, tal como pide el reto.
                 EstadoDeColor(encontrada.Estado, LblEstadoHabitacion);
                 ConfigurarBotonesPorEstado(encontrada.Estado);
             }
@@ -260,11 +357,21 @@ namespace HotelZormat
                 MessageBox.Show("Ese número es demasiado grande.",
                     "Número inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
-            btnGuardarCambios.Enabled = false; // deshabilitado ANTES de intentar guardar
+            btnGuardarCambios.Enabled = false;
 
             try
             {
@@ -275,19 +382,32 @@ namespace HotelZormat
                     return;
                 }
 
-                if (_habitacionActual.Estado == "Ocupada")
+                TipoHabitacion tipoSeleccionado = _tipos.FirstOrDefault(t => t.Nombre == CbxTipo.Text);
+                if (tipoSeleccionado != null)
                 {
-                    throw new HabitacionOcupadaException(_habitacionActual.Numero);
+                    _habitacionActual.TipoHabitacionId = tipoSeleccionado.Id;
                 }
+
+                _habitacionService.Actualizar(_habitacionActual);
 
                 MessageBox.Show("Habitación guardada correctamente.", "Guardado",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                CargarHabitacionesPiso3();
             }
             catch (HabitacionOcupadaException ex)
             {
-                // Catch específico ANTES que el genérico.
                 MessageBox.Show("No se puede guardar la habitación " + ex.NumeroHabitacion + " porque está ocupada.",
                     "Habitación ocupada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -296,11 +416,112 @@ namespace HotelZormat
             }
             finally
             {
-                // Se ejecuta SIEMPRE, pase lo que pase arriba.
                 btnGuardarCambios.Enabled = true;
             }
         }
-    
+
+        private void btnCrearHabitacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int piso = int.Parse(txtPisoCrud.Text);
+                int capacidad = int.Parse(txtCapacidadCrud.Text);
+
+                TipoHabitacion tipoSeleccionado = _tipos.FirstOrDefault(t => t.Nombre == CbxTipo.Text);
+                if (tipoSeleccionado == null)
+                {
+                    MessageBox.Show("Seleccione un tipo de habitación válido.", "Tipo requerido",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var nueva = new Habitacion
+                {
+                    Numero = txtNumeroCrud.Text.Trim(),
+                    TipoHabitacionId = tipoSeleccionado.Id,
+                    Piso = piso,
+                    Capacidad = capacidad,
+                    Estado = "Disponible"
+                };
+
+                _habitacionService.Crear(nueva);
+
+                MessageBox.Show("Habitación creada correctamente.", "Creado",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                txtNumeroCrud.Clear();
+                txtPisoCrud.Clear();
+                txtCapacidadCrud.Clear();
+                CargarHabitacionesPiso3();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Piso y capacidad deben ser números.", "Dato inválido",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEliminarHabitacion_Click(object sender, EventArgs e)
+        {
+            if (_habitacionActual == null)
+            {
+                MessageBox.Show("Primero debe buscar la habitación que desea eliminar.",
+                    "Habitación requerida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirmacion = MessageBox.Show(
+                "¿Confirma que desea eliminar la habitación " + _habitacionActual.Numero + "? Esta acción no se puede deshacer.",
+                "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (confirmacion != DialogResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                bool puedeEliminar = Sesion.UsuarioActual != null && Sesion.UsuarioActual.PuedeEliminarHabitaciones;
+                _habitacionService.Eliminar(_habitacionActual.Id, puedeEliminar);
+
+                MessageBox.Show("Habitación eliminada.", "Eliminado",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _habitacionActual = null;
+                lblMensajeBusqueda.Text = "Sin habitación seleccionada";
+                LblEstadoHabitacion.Text = "Estado:  -";
+                CargarHabitacionesPiso3();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message, "Permiso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void groupBox4_Enter(object sender, EventArgs e)
         {
 
