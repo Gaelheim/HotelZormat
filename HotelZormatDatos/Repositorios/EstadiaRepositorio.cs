@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HotelZormatDatos.Conexion;
 using System.Data;
 using System.Data.SqlClient;
+using HotelZormat.Modelos;
 
 
 namespace HotelZormatDatos.Repositorios

@@ -48,6 +48,13 @@
     <Compile Include="Repositorios\BitacoraRepositorio.cs" />
     <Compile Include="Repositorios\EstadiaRepositorio.cs" />
     <Compile Include="Repositorios\FacturaRepositorio.cs" />
+    <Compile Include="Repositorios\HabitacionRepositorio.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HotelZormat.Modelos\HotelZormat.Modelos.csproj">
+      <Project>{ba60099c-3f99-4fbb-b3ae-69343eb0373e}</Project>
+      <Name>HotelZormat.Modelos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
