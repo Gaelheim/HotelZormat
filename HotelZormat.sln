@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelZormat.Datos", "HotelZ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelZormat.Negocio", "HotelZormat.Negocio\HotelZormat.Negocio.csproj", "{A928D5EE-0E7A-4955-9A5A-672D21D5DDB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelZormat.Modelos", "HotelZormat.Modelos\HotelZormat.Modelos.csproj", "{BA60099C-3F99-4FBB-B3AE-69343EB0373E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelZormat.Modelos", "HotelZormat.Modelo\HotelZormat.Modelos.csproj", "{D712999C-5189-4BCF-BB77-349E71F5CD12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{A928D5EE-0E7A-4955-9A5A-672D21D5DDB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A928D5EE-0E7A-4955-9A5A-672D21D5DDB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A928D5EE-0E7A-4955-9A5A-672D21D5DDB2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA60099C-3F99-4FBB-B3AE-69343EB0373E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA60099C-3F99-4FBB-B3AE-69343EB0373E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA60099C-3F99-4FBB-B3AE-69343EB0373E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA60099C-3F99-4FBB-B3AE-69343EB0373E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D712999C-5189-4BCF-BB77-349E71F5CD12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D712999C-5189-4BCF-BB77-349E71F5CD12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D712999C-5189-4BCF-BB77-349E71F5CD12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D712999C-5189-4BCF-BB77-349E71F5CD12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

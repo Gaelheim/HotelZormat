@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{825171EA-1959-4184-9C92-CE88374FD721}</ProjectGuid>
+    <ProjectGuid>{D712999C-5189-4BCF-BB77-349E71F5CD12}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HotelZormatDatos</RootNamespace>
-    <AssemblyName>HotelZormatDatos</AssemblyName>
+    <RootNamespace>HotelZormat.Modelo</RootNamespace>
+    <AssemblyName>HotelZormat.Modelo</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,19 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Conexion\ConexionBD.cs" />
+    <Compile Include="Bitacora.cs" />
+    <Compile Include="Estadia.cs" />
+    <Compile Include="Factura.cs" />
+    <Compile Include="Habitacion.cs" />
+    <Compile Include="HabitacionesOcupadas.cs" />
+    <Compile Include="Huesped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorios\BitacoraRepositorio.cs" />
-    <Compile Include="Repositorios\EstadiaRepositorio.cs" />
-    <Compile Include="Repositorios\FacturaRepositorio.cs" />
-    <Compile Include="Repositorios\HabitacionRepositorio.cs" />
+    <Compile Include="Reserva.cs" />
+    <Compile Include="Rol.cs" />
+    <Compile Include="Temporada.cs" />
+    <Compile Include="TipoHabitacion.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HotelZormat.Modelo\HotelZormat.Modelos.csproj">
-      <Project>{d712999c-5189-4bcf-bb77-349e71f5cd12}</Project>
-      <Name>HotelZormat.Modelos</Name>
-    </ProjectReference>
+    <None Include="Documentacion\Modelos.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
