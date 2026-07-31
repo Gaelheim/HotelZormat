@@ -48,7 +48,8 @@
     <Compile Include="Servicios\HabitacionService.cs" />
     <Compile Include="Servicios\HuespedService.cs" />
     <Compile Include="Servicios\ReporteService.cs" />
-    <Compile Include="Servicios\ReservasService.cs" />
+    <Compile Include="Servicios\ReservaService.cs" />
+    <Compile Include="Servicios\SeguridadService.cs" />
     <Compile Include="Sesion.cs" />
   </ItemGroup>
   <ItemGroup>
