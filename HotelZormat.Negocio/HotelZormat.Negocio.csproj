@@ -41,18 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\AutenticacionService.cs" />
+    <Compile Include="Servicios\BitacoraService.cs" />
+    <Compile Include="Servicios\CheckInOutService.cs" />
+    <Compile Include="Servicios\HabitacionService.cs" />
+    <Compile Include="Servicios\HuespedService.cs" />
+    <Compile Include="Servicios\ReporteService.cs" />
     <Compile Include="Servicios\ReservasService.cs" />
+    <Compile Include="Sesion.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HotelZormat.Modelo\HotelZormat.Modelos.csproj">
+      <Project>{d712999c-5189-4bcf-bb77-349e71f5cd12}</Project>
+      <Name>HotelZormat.Modelos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HotelZormatDatos\HotelZormat.Datos.csproj">
       <Project>{825171ea-1959-4184-9c92-ce88374fd721}</Project>
       <Name>HotelZormat.Datos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="HabitacionService\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

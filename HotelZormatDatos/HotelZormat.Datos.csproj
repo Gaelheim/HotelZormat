@@ -50,6 +50,10 @@
     <Compile Include="Repositorios\HabitacionRepositorio.cs" />
     <Compile Include="Repositorios\HuespedRepositorio.cs" />
     <Compile Include="Repositorios\ReporteRepositorio.cs" />
+    <Compile Include="Repositorios\ReservaRepositorio.cs" />
+    <Compile Include="Repositorios\TemporadaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoHabitacionRepositorio.cs" />
+    <Compile Include="Repositorios\UsuarioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HotelZormat.Modelo\HotelZormat.Modelos.csproj">

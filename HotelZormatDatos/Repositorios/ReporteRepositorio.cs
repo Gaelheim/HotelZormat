@@ -12,7 +12,7 @@ namespace HotelZormatDatos.Repositorios
     // 40232840757
     public class ReporteRepositorio
     {
-        public class ReporteRepository
+        
         {
             //Reporte 1: ocupación del día, vía la vista vw_OcupacionDelDia.
             public DataTable OcupacionDelDia()
@@ -31,6 +31,6 @@ namespace HotelZormatDatos.Repositorios
                 }
                 return tabla;
             }
-        }
+        
     }
 }

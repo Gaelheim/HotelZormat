@@ -6,36 +6,20 @@ using System.Threading.Tasks;
 
 namespace HotelZormat.Negocio.Servicios
 {
+    // 40232840757
     public class ReservasService
     {
-        public bool ValidarTipoHabitacion(string tipo)
-        {
-            if (string.IsNullOrWhiteSpace(tipo))
-            {
-                return false;
-            }
-
-            if (tipo == "Sencilla" || tipo == "Doble" || tipo == "Suite")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /*  public bool ValidarTipoHabitacion(string tipo)
+      
+         public bool ValidarTipoHabitacion(string tipo)
           {
               if (string.IsNullOrWhiteSpace(tipo)) return false;
               return tipo == "Sencilla" || tipo == "Doble" || tipo == "Suite";
-          } */
+          }
 
-        /// <summary>
-        /// Devuelve el factor a aplicar según la temporada.
-        /// Positivo = descuento, negativo = recarga.
-        /// Reto 02 · usa switch
-        /// /// </summary>
+       
+        //Devuelve el factor a aplicar según la temporada.
+        // Positivo = descuento, negativo = recargo.
+       
         public decimal ObtenerDescuentoPorTemporada(string temporada)
         {
             decimal factor;
@@ -55,7 +39,7 @@ namespace HotelZormat.Negocio.Servicios
                     break;
 
                 case "Pico":
-                    factor = -0.15m;   // negativo = recarga
+                    factor = -0.15m;   
                     break;
 
                 default:
@@ -65,11 +49,9 @@ namespace HotelZormat.Negocio.Servicios
             return factor;
         }
 
-        /// <summary>
-        /// Genera las líneas de detalle de una factura, una por noche.
-        /// Devuelve una lista de strings con el formato "Noche N: RD$ tarifa".
-        /// Reto 03 · usa for
-        /// /// </summary>
+       
+        // Genera las líneas de detalle de una factura, una por noche.
+       
         public List<string> GenerarLineasFactura(int noches, decimal tarifaPorNoche)
         {
             var lineas = new List<string>();
