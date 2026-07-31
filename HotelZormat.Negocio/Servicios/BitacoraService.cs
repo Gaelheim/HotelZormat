@@ -1,31 +1,30 @@
-﻿using HotelZormatDatos.Repositorios;
+﻿using HotelZormat.Modelos;
+using HotelZormatDatos.Repositorios;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelZormat.Negocio.Servicios
 {
     //40232840757
     public class BitacoraService
     {
-        private readonly BitacoraRepositorio _bitacoraRepositorio = new BitacoraRepositorio();
+        private readonly BitacoraRepositorio _repositorio =
+            new BitacoraRepositorio();
 
-        public void Registrar(int usuarioId, string accion, string detalle)
+        public void Registrar(int usuarioId,
+                              string accion,
+                              string detalle)
         {
-            _bitacoraRepositorio.Registrar(usuarioId, accion, detalle);
+            _repositorio.Registrar(usuarioId, accion, detalle);
         }
 
-        //Solo debe llamarse desde una pantalla ya validada como Administrador.
-        public DataTable Listar(bool puedeVerBitacora)
+        public List<Bitacora> Listar(bool puedeVerBitacora)
         {
             if (!puedeVerBitacora)
-            {
-                throw new System.UnauthorizedAccessException("Su rol no tiene permiso para ver la bitácora.");
-            }
-            return _bitacoraRepositorio.Listar();
+                throw new UnauthorizedAccessException(
+                    "Su rol no tiene permiso para consultar la bitácora.");
+
+            return _repositorio.Listar();
         }
     }
 }

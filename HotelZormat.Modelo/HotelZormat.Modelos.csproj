@@ -49,7 +49,6 @@
     <Compile Include="Huesped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserva.cs" />
-    <Compile Include="Rol.cs" />
     <Compile Include="Temporada.cs" />
     <Compile Include="TipoHabitacion.cs" />
     <Compile Include="Usuario.cs" />

@@ -11,51 +11,51 @@ namespace HotelZormat
     //Consulta de la bitácora (solo adm puede verlo)
     public partial class FrmBitacora : Form
     {
-        private readonly BitacoraService _bitacoraService = new BitacoraService();
+        private readonly BitacoraService _bitacoraService = new BitacoraService(); // Instancia del servicio de bitácora
 
         public FrmBitacora()
         {
             InitializeComponent();
-            this.Load += FrmBitacora_Load;
+            this.Load += FrmBitacora_Load; 
         }
 
         private void FrmBitacora_Load(object sender, EventArgs e)
         {
-            bool puedeVer = Sesion.UsuarioActual != null && Sesion.UsuarioActual.PuedeVerBitacora;
-            if (!puedeVer)
-            {
-                MessageBox.Show("Solo el rol Administrador puede consultar la bitácora.",
-                    "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.Close();
-                return;
-            }
+          
             CargarBitacora();
         }
 
+
+        // Método para cargar la bitácora en el DataGridView
         private void CargarBitacora()
         {
+            // Verificar si el usuario actual tiene permiso para ver la bitácora
             try
             {
                 bool puedeVer = Sesion.UsuarioActual != null && Sesion.UsuarioActual.PuedeVerBitacora;
+
+                dgvBitacora.AutoGenerateColumns = true;
+
                 dgvBitacora.DataSource = _bitacoraService.Listar(puedeVer);
             }
-            catch (UnauthorizedAccessException ex)
+            // Manejo de excepciones específicas
+
+            catch (UnauthorizedAccessException ex) // Captura la excepción de acceso denegado
             {
                 MessageBox.Show(ex.Message, "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.Close();
+                Close();
             }
-            catch (SqlException ex)
+            catch (SqlException ex) // Captura la excepción de SQL
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message,"Base de datos",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-            catch (Exception ex)
+            catch (Exception ex) // Captura cualquier otra excepción
             {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show( ex.Message, "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
+        // Evento del botón de refrescar para recargar la bitácora
         private void btnRefrescar_Click(object sender, EventArgs e)
         {
             CargarBitacora();

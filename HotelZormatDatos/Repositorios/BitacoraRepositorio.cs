@@ -1,11 +1,9 @@
-﻿using HotelZormatDatos.Conexion;
+﻿using HotelZormat.Modelos;
+using HotelZormatDatos.Conexion;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelZormatDatos.Repositorios
 {
@@ -21,15 +19,16 @@ namespace HotelZormatDatos.Repositorios
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.AddWithValue("@UsuarioId", usuarioId);
                 comando.Parameters.AddWithValue("@Accion", accion);
-                comando.Parameters.AddWithValue("@Detalle", (object)detalle ?? System.DBNull.Value);
-
+                comando.Parameters.AddWithValue("@Detalle",
+                    string.IsNullOrWhiteSpace(detalle) ? (object)DBNull.Value
+                    : detalle);
                 conexion.Open();
                 comando.ExecuteNonQuery();
             }
         }
 
         //Consulta completa de la bitácora (solo accesible desde la UI para el rol Administrador).
-        public DataTable Listar()
+        public List<Bitacora> Listar()
         {
             const string consulta =
                 "SELECT b.FechaHora, u.NombreUsuario, r.Nombre AS Rol, b.Accion, b.Detalle " +
@@ -38,17 +37,33 @@ namespace HotelZormatDatos.Repositorios
                 "JOIN Roles r ON r.Id = u.RolId " +
                 "ORDER BY b.FechaHora DESC";
 
-            var tabla = new DataTable();
+            List<Bitacora> lista = new List<Bitacora>();
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             using (SqlCommand comando = new SqlCommand(consulta, conexion))
             {
                 conexion.Open();
                 using (SqlDataReader lector = comando.ExecuteReader())
                 {
-                    tabla.Load(lector);
+                    while (lector.Read())
+                    {
+                        lista.Add(new Bitacora
+                        {
+                            Id = Convert.ToInt32(lector["Id"]),
+                            UsuarioId = Convert.ToInt32(lector["UsuarioId"]),
+                            NombreUsuario = lector["NombreUsuario"].ToString(),
+                            RolNombre = lector["RolNombre"].ToString(),
+                            Accion = lector["Accion"].ToString(),
+                            Detalle = lector["Detalle"] == DBNull.Value
+                                        ? string.Empty
+                                        : lector["Detalle"].ToString(),
+                            FechaHora = Convert.ToDateTime(lector["FechaHora"])
+                        });
+                    }
+
+                    return lista;
+
                 }
             }
-            return tabla;
         }
     }
 }
