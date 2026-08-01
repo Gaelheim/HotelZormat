@@ -1,4 +1,4 @@
-锘縩amespace HotelZormat
+namespace HotelZormat
 {
     partial class FrmGestionHabitaciones
     {
@@ -31,21 +31,21 @@
             this.GbxTipoHabitacion = new System.Windows.Forms.GroupBox();
             this.lblIcono = new System.Windows.Forms.Label();
             this.lblTarifa = new System.Windows.Forms.Label();
-            this.CbxTipo = new System.Windows.Forms.ComboBox();
+            this.cboTipo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.GbxBuscarHabitacion = new System.Windows.Forms.GroupBox();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.tbxNumeroHabitacion = new System.Windows.Forms.TextBox();
+            this.txtNumeroHabitacion = new System.Windows.Forms.TextBox();
             this.lblMensajeBusqueda = new System.Windows.Forms.Label();
             this.LblEstadoHabitacion = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.GbxPiso3 = new System.Windows.Forms.GroupBox();
-            this.lbxHabitacionPiso3 = new System.Windows.Forms.ListBox();
+            this.lstHabitaciones = new System.Windows.Forms.ListBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.GbxAcciones = new System.Windows.Forms.GroupBox();
-            this.BtnLimpieza = new System.Windows.Forms.Button();
+            this.btnLimpieza = new System.Windows.Forms.Button();
             this.btnCheckOut = new System.Windows.Forms.Button();
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.btnReservar = new System.Windows.Forms.Button();
@@ -75,7 +75,7 @@
             // 
             this.GbxTipoHabitacion.Controls.Add(this.lblIcono);
             this.GbxTipoHabitacion.Controls.Add(this.lblTarifa);
-            this.GbxTipoHabitacion.Controls.Add(this.CbxTipo);
+            this.GbxTipoHabitacion.Controls.Add(this.cboTipo);
             this.GbxTipoHabitacion.Controls.Add(this.label3);
             this.GbxTipoHabitacion.Controls.Add(this.label2);
             this.GbxTipoHabitacion.Controls.Add(this.label1);
@@ -86,7 +86,7 @@
             this.GbxTipoHabitacion.Size = new System.Drawing.Size(150, 114);
             this.GbxTipoHabitacion.TabIndex = 0;
             this.GbxTipoHabitacion.TabStop = false;
-            this.GbxTipoHabitacion.Text = "Tipo de habitaci贸n";
+            this.GbxTipoHabitacion.Text = "Tipo de habitaci髇";
             // 
             // lblIcono
             // 
@@ -107,14 +107,14 @@
             this.lblTarifa.TabIndex = 4;
             this.lblTarifa.Text = "RD$ 0";
             // 
-            // CbxTipo
+            // cboTipo
             // 
-            this.CbxTipo.FormattingEnabled = true;
-            this.CbxTipo.Location = new System.Drawing.Point(42, 22);
-            this.CbxTipo.Margin = new System.Windows.Forms.Padding(2);
-            this.CbxTipo.Name = "CbxTipo";
-            this.CbxTipo.Size = new System.Drawing.Size(92, 21);
-            this.CbxTipo.TabIndex = 4;
+            this.cboTipo.FormattingEnabled = true;
+            this.cboTipo.Location = new System.Drawing.Point(42, 22);
+            this.cboTipo.Margin = new System.Windows.Forms.Padding(2);
+            this.cboTipo.Name = "cboTipo";
+            this.cboTipo.Size = new System.Drawing.Size(92, 21);
+            this.cboTipo.TabIndex = 4;
             // 
             // label3
             // 
@@ -149,7 +149,7 @@
             // GbxBuscarHabitacion
             // 
             this.GbxBuscarHabitacion.Controls.Add(this.btnBuscar);
-            this.GbxBuscarHabitacion.Controls.Add(this.tbxNumeroHabitacion);
+            this.GbxBuscarHabitacion.Controls.Add(this.txtNumeroHabitacion);
             this.GbxBuscarHabitacion.Controls.Add(this.lblMensajeBusqueda);
             this.GbxBuscarHabitacion.Controls.Add(this.LblEstadoHabitacion);
             this.GbxBuscarHabitacion.Controls.Add(this.label4);
@@ -160,7 +160,7 @@
             this.GbxBuscarHabitacion.Size = new System.Drawing.Size(178, 114);
             this.GbxBuscarHabitacion.TabIndex = 1;
             this.GbxBuscarHabitacion.TabStop = false;
-            this.GbxBuscarHabitacion.Text = "Buscar Habitaci贸n";
+            this.GbxBuscarHabitacion.Text = "Buscar Habitaci髇";
             // 
             // btnBuscar
             // 
@@ -174,13 +174,13 @@
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // tbxNumeroHabitacion
+            // txtNumeroHabitacion
             // 
-            this.tbxNumeroHabitacion.Location = new System.Drawing.Point(47, 20);
-            this.tbxNumeroHabitacion.Margin = new System.Windows.Forms.Padding(2);
-            this.tbxNumeroHabitacion.Name = "tbxNumeroHabitacion";
-            this.tbxNumeroHabitacion.Size = new System.Drawing.Size(57, 20);
-            this.tbxNumeroHabitacion.TabIndex = 4;
+            this.txtNumeroHabitacion.Location = new System.Drawing.Point(47, 20);
+            this.txtNumeroHabitacion.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNumeroHabitacion.Name = "txtNumeroHabitacion";
+            this.txtNumeroHabitacion.Size = new System.Drawing.Size(57, 20);
+            this.txtNumeroHabitacion.TabIndex = 4;
             // 
             // lblMensajeBusqueda
             // 
@@ -190,7 +190,7 @@
             this.lblMensajeBusqueda.Name = "lblMensajeBusqueda";
             this.lblMensajeBusqueda.Size = new System.Drawing.Size(140, 13);
             this.lblMensajeBusqueda.TabIndex = 3;
-            this.lblMensajeBusqueda.Text = "Sin habitaci贸n seleccionada";
+            this.lblMensajeBusqueda.Text = "Sin habitaci髇 seleccionada";
             // 
             // LblEstadoHabitacion
             // 
@@ -210,11 +210,11 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 1;
-            this.label4.Text = "N煤mero:";
+            this.label4.Text = "N鷐ero:";
             // 
             // GbxPiso3
             // 
-            this.GbxPiso3.Controls.Add(this.lbxHabitacionPiso3);
+            this.GbxPiso3.Controls.Add(this.lstHabitaciones);
             this.GbxPiso3.Location = new System.Drawing.Point(368, 10);
             this.GbxPiso3.Margin = new System.Windows.Forms.Padding(2);
             this.GbxPiso3.Name = "GbxPiso3";
@@ -224,18 +224,18 @@
             this.GbxPiso3.TabStop = false;
             this.GbxPiso3.Text = "Habitaciones piso 3";
             // 
-            // lbxHabitacionPiso3
+            // lstHabitaciones
             // 
-            this.lbxHabitacionPiso3.FormattingEnabled = true;
-            this.lbxHabitacionPiso3.Location = new System.Drawing.Point(4, 17);
-            this.lbxHabitacionPiso3.Margin = new System.Windows.Forms.Padding(2);
-            this.lbxHabitacionPiso3.Name = "lbxHabitacionPiso3";
-            this.lbxHabitacionPiso3.Size = new System.Drawing.Size(142, 82);
-            this.lbxHabitacionPiso3.TabIndex = 0;
+            this.lstHabitaciones.FormattingEnabled = true;
+            this.lstHabitaciones.Location = new System.Drawing.Point(4, 17);
+            this.lstHabitaciones.Margin = new System.Windows.Forms.Padding(2);
+            this.lstHabitaciones.Name = "lstHabitaciones";
+            this.lstHabitaciones.Size = new System.Drawing.Size(142, 82);
+            this.lstHabitaciones.TabIndex = 0;
             // 
             // GbxAcciones
             // 
-            this.GbxAcciones.Controls.Add(this.BtnLimpieza);
+            this.GbxAcciones.Controls.Add(this.btnLimpieza);
             this.GbxAcciones.Controls.Add(this.btnCheckOut);
             this.GbxAcciones.Controls.Add(this.btnCheckIn);
             this.GbxAcciones.Controls.Add(this.btnReservar);
@@ -249,16 +249,16 @@
             this.GbxAcciones.Text = "Acciones";
             this.GbxAcciones.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
-            // BtnLimpieza
+            // btnLimpieza
             // 
-            this.BtnLimpieza.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.BtnLimpieza.Location = new System.Drawing.Point(402, 17);
-            this.BtnLimpieza.Margin = new System.Windows.Forms.Padding(2);
-            this.BtnLimpieza.Name = "BtnLimpieza";
-            this.BtnLimpieza.Size = new System.Drawing.Size(102, 19);
-            this.BtnLimpieza.TabIndex = 3;
-            this.BtnLimpieza.Text = "Marcar Limpia";
-            this.BtnLimpieza.UseVisualStyleBackColor = false;
+            this.btnLimpieza.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnLimpieza.Location = new System.Drawing.Point(402, 17);
+            this.btnLimpieza.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLimpieza.Name = "btnLimpieza";
+            this.btnLimpieza.Size = new System.Drawing.Size(102, 19);
+            this.btnLimpieza.TabIndex = 3;
+            this.btnLimpieza.Text = "Marcar Limpia";
+            this.btnLimpieza.UseVisualStyleBackColor = false;
             // 
             // btnCheckOut
             // 
@@ -306,7 +306,7 @@
             this.GbxGuardarConfirmar.Size = new System.Drawing.Size(508, 75);
             this.GbxGuardarConfirmar.TabIndex = 3;
             this.GbxGuardarConfirmar.TabStop = false;
-            this.GbxGuardarConfirmar.Text = "Confirmaci贸n y guardar";
+            this.GbxGuardarConfirmar.Text = "Confirmaci髇 y guardar";
             // 
             // btnGuardarCambios
             // 
@@ -349,7 +349,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(40, 13);
             this.label7.TabIndex = 3;
-            this.label7.Text = "Acci贸n";
+            this.label7.Text = "Acci髇";
             // 
             // GbxCrudHabitacion
             // 
@@ -368,7 +368,7 @@
             this.GbxCrudHabitacion.Size = new System.Drawing.Size(508, 75);
             this.GbxCrudHabitacion.TabIndex = 4;
             this.GbxCrudHabitacion.TabStop = false;
-            this.GbxCrudHabitacion.Text = "Nueva habitaci贸n ";
+            this.GbxCrudHabitacion.Text = "Nueva habitaci髇 ";
             // 
             // txtNumeroCrud
             // 
@@ -386,7 +386,7 @@
             this.lblNumeroCrud.Name = "lblNumeroCrud";
             this.lblNumeroCrud.Size = new System.Drawing.Size(47, 13);
             this.lblNumeroCrud.TabIndex = 0;
-            this.lblNumeroCrud.Text = "N煤mero:";
+            this.lblNumeroCrud.Text = "N鷐ero:";
             // 
             // txtPisoCrud
             // 
@@ -494,9 +494,9 @@
         private System.Windows.Forms.Label lblMensajeBusqueda;
         private System.Windows.Forms.Label LblEstadoHabitacion;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox lbxHabitacionPiso3;
-        private System.Windows.Forms.ComboBox CbxTipo;
-        private System.Windows.Forms.Button BtnLimpieza;
+        private System.Windows.Forms.ListBox lstHabitaciones;
+        private System.Windows.Forms.ComboBox cboTipo;
+        private System.Windows.Forms.Button btnLimpieza;
         private System.Windows.Forms.Button btnCheckOut;
         private System.Windows.Forms.Button btnCheckIn;
         private System.Windows.Forms.Button btnReservar;
@@ -506,7 +506,7 @@
         private System.Windows.Forms.Label lblTarifa;
         private System.Windows.Forms.Button btnGuardarCambios;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.TextBox tbxNumeroHabitacion;
+        private System.Windows.Forms.TextBox txtNumeroHabitacion;
         private System.Windows.Forms.Label lblIcono;
         private System.Windows.Forms.GroupBox GbxCrudHabitacion;
         private System.Windows.Forms.TextBox txtNumeroCrud;
@@ -519,3 +519,4 @@
         private System.Windows.Forms.Button btnEliminarHabitacion;
     }
 }
+

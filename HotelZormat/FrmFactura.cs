@@ -12,6 +12,7 @@ namespace HotelZormat
         public FrmFactura(Factura factura)
         {
             InitializeComponent();
+            ThemeHelper.AplicarTema(this);
 
             if (factura != null)
             {
@@ -29,3 +30,4 @@ namespace HotelZormat
         }
     }
 }
+

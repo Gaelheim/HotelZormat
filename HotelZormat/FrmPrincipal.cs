@@ -1,5 +1,6 @@
-﻿using HotelZormat.Negocio;
-using HotelZormat.Negocio.Modelo;
+﻿// CÃ©dula: 40232840757
+using HotelZormat.Negocio;
+using HotelZormat.Modelos;
 using HotelZormat.Negocio.Servicios;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace HotelZormat
         public FrmPrincipal()
         {
             InitializeComponent();
+            ThemeHelper.AplicarTema(this);
             this.Load += FrmPrincipal_Load;
         }
 
@@ -36,7 +38,7 @@ namespace HotelZormat
             CargarDashboard();
         }
 
-        /// <summary>Reto (switch): pinta cada tarjeta del panel según el Estado de la habitación.</summary>
+        /// <summary>Reto (switch): pinta cada tarjeta del panel segÃºn el Estado de la habitaciÃ³n.</summary>
         private void CargarDashboard()
         {
             try
@@ -83,14 +85,19 @@ namespace HotelZormat
                     pnlDashboard.Controls.Add(tarjeta);
                 }
             }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Error de formato: " + ex.Message, "Error de formato",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -162,3 +169,4 @@ namespace HotelZormat
         }
     }
 }
+

@@ -22,6 +22,7 @@
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblApellido = new System.Windows.Forms.Label();
+            this.lblPuntosClub = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.lblTipoDocumento = new System.Windows.Forms.Label();
             this.cboTipoDocumento = new System.Windows.Forms.ComboBox();
@@ -91,12 +92,13 @@
             this.gbxDatos.Controls.Add(this.btnGuardar);
             this.gbxDatos.Controls.Add(this.btnEliminar);
             this.gbxDatos.Controls.Add(this.btnHistorial);
+            this.gbxDatos.Controls.Add(this.lblPuntosClub);
             this.gbxDatos.Location = new System.Drawing.Point(12, 230);
             this.gbxDatos.Name = "gbxDatos";
-            this.gbxDatos.Size = new System.Drawing.Size(560, 160);
+            this.gbxDatos.Size = new System.Drawing.Size(560, 165);
             this.gbxDatos.TabIndex = 3;
             this.gbxDatos.TabStop = false;
-            this.gbxDatos.Text = "Datos del huésped";
+            this.gbxDatos.Text = "Datos del huÃ©sped";
             //
             // lblNombre
             //
@@ -188,7 +190,7 @@
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(50, 13);
             this.lblTelefono.TabIndex = 10;
-            this.lblTelefono.Text = "Teléfono:";
+            this.lblTelefono.Text = "TelÃ©fono:";
             //
             // txtTelefono
             //
@@ -219,7 +221,7 @@
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(60, 23);
             this.btnNuevo.TabIndex = 14;
-            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.Text = "Limpiar";
             this.btnNuevo.UseVisualStyleBackColor = true;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             //
@@ -252,12 +254,24 @@
             this.btnHistorial.Text = "Historial";
             this.btnHistorial.UseVisualStyleBackColor = true;
             this.btnHistorial.Click += new System.EventHandler(this.btnHistorial_Click);
+            // 
+            // lblPuntosClub
+            // 
+            this.lblPuntosClub.AutoSize = true;
+            this.lblPuntosClub.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPuntosClub.ForeColor = System.Drawing.Color.DarkBlue;
+            this.lblPuntosClub.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPuntosClub.Location = new System.Drawing.Point(10, 138);
+            this.lblPuntosClub.Name = "lblPuntosClub";
+            this.lblPuntosClub.Size = new System.Drawing.Size(92, 13);
+            this.lblPuntosClub.TabIndex = 18;
+            this.lblPuntosClub.Text = "Club: Hierro | 0 pts | 0 noches";
             //
             // FrmHuespedes
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 402);
+            this.ClientSize = new System.Drawing.Size(584, 407);
             this.Controls.Add(this.gbxDatos);
             this.Controls.Add(this.dgvHuespedes);
             this.Controls.Add(this.btnBuscar);
@@ -265,7 +279,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmHuespedes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "HotelZormat - Huéspedes";
+            this.Text = "HotelZormat - HuÃ©spedes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvHuespedes)).EndInit();
             this.gbxDatos.ResumeLayout(false);
             this.gbxDatos.PerformLayout();
@@ -296,5 +310,8 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnHistorial;
+        private System.Windows.Forms.Label lblPuntosClub;
     }
 }
+
+

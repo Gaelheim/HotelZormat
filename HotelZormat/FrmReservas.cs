@@ -1,5 +1,5 @@
 ﻿using HotelZormat.Negocio;
-using HotelZormat.Negocio.Modelo;
+using HotelZormat.Modelos;
 using HotelZormat.Negocio.Servicios;
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 
+// CÃ©dula: 40232840757
 namespace HotelZormat
 {
     public partial class FrmReservas : Form
@@ -25,6 +26,7 @@ namespace HotelZormat
         public FrmReservas(string numeroHabitacionPreseleccionada)
         {
             InitializeComponent();
+            ThemeHelper.AplicarTema(this);
             this.Load += (s, e) => CargarDatos(numeroHabitacionPreseleccionada);
         }
 
@@ -71,12 +73,12 @@ namespace HotelZormat
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -92,7 +94,7 @@ namespace HotelZormat
             {
                 if (cboHabitacion.SelectedIndex < 0 || cboHuesped.SelectedIndex < 0 || cboTemporada.SelectedIndex < 0)
                 {
-                    MessageBox.Show("Debe seleccionar habitación, huésped y temporada.", "Datos incompletos",
+                    MessageBox.Show("Debe seleccionar habitaciÃ³n, huÃ©sped y temporada.", "Datos incompletos",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -122,20 +124,24 @@ namespace HotelZormat
             }
             catch (HabitacionOcupadaException ex)
             {
-                MessageBox.Show(ex.Message, "Habitación no disponible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "HabitaciÃ³n no disponible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (ArgumentException ex)
             {
-                MessageBox.Show(ex.Message, "Fechas inválidas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Fechas invÃ¡lidas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Error de formato: " + ex.Message, "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -152,21 +158,26 @@ namespace HotelZormat
                 }
 
                 _reservaService.Confirmar(_ultimaReservaCreadaId);
-                MessageBox.Show("Reserva confirmada. Ya puede hacer Check-In desde Gestión de Habitaciones.",
+                MessageBox.Show("Reserva confirmada. Ya puede hacer Check-In desde GestiÃ³n de Habitaciones.",
                     "Confirmada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnConfirmarReserva.Enabled = false;
                 CargarProximas();
             }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Error de formato: " + ex.Message, "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
 }
+

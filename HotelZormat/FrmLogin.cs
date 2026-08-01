@@ -1,5 +1,6 @@
-﻿using HotelZormat.Negocio;
-using HotelZormat.Negocio.Modelo;
+﻿// CÃ©dula: 40232840757
+using HotelZormat.Negocio;
+using HotelZormat.Modelos;
 using HotelZormat.Negocio.Servicios;
 using System;
 using System.Data.SqlClient;
@@ -14,6 +15,7 @@ namespace HotelZormat
         public FrmLogin()
         {
             InitializeComponent();
+            ThemeHelper.AplicarTema(this);
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -26,7 +28,7 @@ namespace HotelZormat
 
                 if (usuario == null)
                 {
-                    lblMensaje.Text = "Usuario o contraseña incorrectos.";
+                    lblMensaje.Text = "Usuario o contraseÃ±a incorrectos.";
                     return;
                 }
 
@@ -36,20 +38,23 @@ namespace HotelZormat
             }
             catch (ArgumentException ex)
             {
-                // FormatException primero en el resto de la app; aquí ArgumentException
-                // cubre los campos vacíos, que es la validación propia de este formulario.
                 lblMensaje.Text = ex.Message;
+            }
+            catch (FormatException ex)
+            {
+                lblMensaje.Text = "Error de formato: " + ex.Message;
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
+                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
 }
+
