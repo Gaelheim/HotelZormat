@@ -1,4 +1,4 @@
-﻿// CÃ©dula: 40232840757
+﻿
 using HotelZormat.Negocio;
 using HotelZormat.Modelos;
 using HotelZormat.Negocio.Servicios;
@@ -15,6 +15,7 @@ using System.Windows.Forms;
 
 namespace HotelZormat
 {
+    //40232840757
     public partial class FrmPrincipal : Form
     {
         private readonly HabitacionService _habitacionService = new HabitacionService();
@@ -38,7 +39,7 @@ namespace HotelZormat
             CargarDashboard();
         }
 
-        /// <summary>Reto (switch): pinta cada tarjeta del panel segÃºn el Estado de la habitaciÃ³n.</summary>
+        // Método para cargar el dashboard con las habitaciones y sus estados
         private void CargarDashboard()
         {
             try
@@ -55,6 +56,8 @@ namespace HotelZormat
                         Margin = new Padding(5),
                         BorderStyle = BorderStyle.FixedSingle
                     };
+
+                    // Cambiar el color de fondo según el estado de la habitación
 
                     switch (habitacion.Estado)
                     {
@@ -75,6 +78,7 @@ namespace HotelZormat
                             break;
                     }
 
+                    // Agregar un Label para mostrar el número de habitación, tipo y estado
                     var lbl = new Label
                     {
                         Dock = DockStyle.Fill,
@@ -97,7 +101,7 @@ namespace HotelZormat
             }
             catch (Exception ex)
             {
-                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

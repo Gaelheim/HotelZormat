@@ -6,11 +6,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 
-// CÃ©dula: 40232840757
+//40232840757
 namespace HotelZormat
 {
     public partial class FrmHuespedes : Form
     {
+        // Servicio para manejar operaciones relacionadas con huéspedes
         private readonly HuespedService _huespedService = new HuespedService();
         private DataTable _tablaHuespedes;
         private int _idSeleccionado;
@@ -22,13 +23,13 @@ namespace HotelZormat
             this.Load += (s, e) => CargarLista(null);
         }
 
+        // Método para cargar la lista de huéspedes en el DataGridView, con un filtro opcional
         private void CargarLista(string filtro)
         {
             try
             {
-                var huespedes = string.IsNullOrWhiteSpace(filtro)
-                    ? _huespedService.Listar()
-                    : _huespedService.Buscar(filtro);
+                // Obtener la lista de huéspedes según el filtro proporcionado
+                var huespedes = string.IsNullOrWhiteSpace(filtro) ? _huespedService.Listar() : _huespedService.Buscar(filtro);
 
                 _tablaHuespedes = new DataTable();
                 _tablaHuespedes.Columns.Add("Id", typeof(int));
@@ -40,14 +41,17 @@ namespace HotelZormat
                 _tablaHuespedes.Columns.Add("RangoClub", typeof(string));
                 _tablaHuespedes.Columns.Add("PuntosClub", typeof(string));
 
+                // Llenar la tabla con los datos de los huéspedes y sus puntos de club
                 foreach (Huesped huesped in huespedes)
                 {
+                    // Obtener los puntos de club del huésped
                     ClubMillas club = _huespedService.ObtenerMillasClub(huesped.Id);
                     _tablaHuespedes.Rows.Add(huesped.Id, huesped.Nombre, huesped.Apellido,
                         huesped.TipoDocumento, huesped.NumeroDocumento, huesped.Nacionalidad,
                         club.Rango, club.PuntosAcumulados.ToString("N0") + " pts");
                 }
 
+                // Asignar la tabla al DataGridView y configurar las columnas
                 dgvHuespedes.DataSource = _tablaHuespedes;
                 if (dgvHuespedes.Columns["Id"] != null)
                 {
@@ -62,18 +66,26 @@ namespace HotelZormat
                     dgvHuespedes.Columns["PuntosClub"].HeaderText = "Puntos Club";
                 }
             }
+
+            // Manejo de excepciones para errores de formato, base de datos y otros errores inesperados
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Error de formato: " + ex.Message, "Error de formato",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // Evento del botón de búsqueda para filtrar la lista de huéspedes según el texto ingresado
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             CargarLista(txtBuscar.Text);
@@ -96,6 +108,7 @@ namespace HotelZormat
             lblPuntosClub.Text = "Club: " + club.Rango + " | " + club.PuntosAcumulados.ToString("N0") + " pts | " + club.NochesAcumuladas + " noches";
         }
 
+        // Evento del botón "Nuevo" para limpiar los campos y preparar el formulario para un nuevo huésped
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             _idSeleccionado = 0;
@@ -109,6 +122,7 @@ namespace HotelZormat
             lblPuntosClub.Text = "Club: Hierro | 0 pts | 0 noches";
         }
 
+        // Evento del botón "Guardar" para crear o actualizar un huésped según el ID seleccionado
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -120,6 +134,7 @@ namespace HotelZormat
                     return;
                 }
 
+                // Crear un objeto Huesped con los datos ingresados en el formulario
                 var huesped = new Huesped
                 {
                     Id = _idSeleccionado,
@@ -141,28 +156,28 @@ namespace HotelZormat
                     _huespedService.Crear(huesped);
                 }
 
-                MessageBox.Show("HuÃ©sped guardado correctamente.", "Guardado",
+                MessageBox.Show("Huesped guardado correctamente.", "Guardado",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 CargarLista(txtBuscar.Text);
             }
             catch (FormatException ex)
             {
-                // CÃ©dula con formato invÃ¡lido (menos/mÃ¡s de 11 dÃ­gitos, o no numÃ©rica).
-                MessageBox.Show(ex.Message, "CÃ©dula invÃ¡lida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Cédula con formato inválido (menos/más de 11 dígitos, o no numérica).
+                MessageBox.Show(ex.Message, "Cédula inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (ArgumentException ex)
             {
-                MessageBox.Show(ex.Message, "Dato invÃ¡lido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -171,13 +186,13 @@ namespace HotelZormat
         {
             if (_idSeleccionado <= 0)
             {
-                MessageBox.Show("Seleccione un huÃ©sped de la lista.", "HuÃ©sped requerido",
+                MessageBox.Show("Seleccione un huésped de la lista.", "Huésped requerido",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            DialogResult confirmacion = MessageBox.Show("Â¿Confirma que desea eliminar este huÃ©sped?",
-                "Confirmar eliminaciÃ³n", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult confirmacion = MessageBox.Show("¿Confirma que desea eliminar este huésped?",
+                "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmacion != DialogResult.Yes) return;
 
             try
@@ -193,12 +208,12 @@ namespace HotelZormat
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -207,7 +222,7 @@ namespace HotelZormat
         {
             if (_idSeleccionado <= 0)
             {
-                MessageBox.Show("Seleccione un huÃ©sped de la lista.", "HuÃ©sped requerido",
+                MessageBox.Show("Seleccione un huésped de la lista.", "Huésped requerido",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -217,7 +232,7 @@ namespace HotelZormat
                 DataTable historial = _huespedService.HistorialEstadias(_idSeleccionado);
                 using (var frm = new Form())
                 {
-                    frm.Text = "Historial de estadÃ­as";
+                    frm.Text = "Historial de estadías";
                     frm.Width = 500;
                     frm.Height = 300;
                     frm.StartPosition = FormStartPosition.CenterParent;
@@ -233,12 +248,12 @@ namespace HotelZormat
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

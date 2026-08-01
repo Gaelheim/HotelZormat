@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace HotelZormat
 {
-    // Cédula: 40232840757
+    // 40232840757
     public static class ThemeHelper
     {
         public static readonly Color ColorBurgundy = Color.FromArgb(92, 32, 35);    // #5C2023 - Primario

@@ -36,12 +36,12 @@ namespace HotelZormat
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -75,7 +75,7 @@ namespace HotelZormat
             }
             catch (ArgumentException ex)
             {
-                MessageBox.Show(ex.Message, "Rango de fechas invÃ¡lido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Rango de fechas inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (FormatException ex)
             {
@@ -83,12 +83,12 @@ namespace HotelZormat
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

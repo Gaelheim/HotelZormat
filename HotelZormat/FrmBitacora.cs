@@ -1,4 +1,4 @@
-﻿// CÃ©dula: 40232840757
+﻿
 using HotelZormat.Negocio;
 using HotelZormat.Negocio.Servicios;
 using System;
@@ -9,10 +9,10 @@ using System.Windows.Forms;
 namespace HotelZormat
 {
     //40232840757 
-    //Consulta de la bitÃ¡cora (solo adm puede verlo)
+    //Consulta de la bitacora (solo adm puede verlo)
     public partial class FrmBitacora : Form
     {
-        private readonly BitacoraService _bitacoraService = new BitacoraService(); // Instancia del servicio de bitÃ¡cora
+        private readonly BitacoraService _bitacoraService = new BitacoraService(); // Instancia del servicio de bitacora
 
         public FrmBitacora()
         {
@@ -28,10 +28,10 @@ namespace HotelZormat
         }
 
 
-        // MÃ©todo para cargar la bitÃ¡cora en el DataGridView
+        // Metodo para cargar la bitacora en el DataGridView
         private void CargarBitacora()
         {
-            // Verificar si el usuario actual tiene permiso para ver la bitÃ¡cora
+            // Verificar si el usuario actual tiene permiso para ver la bitacora
             try
             {
                 bool puedeVer = Sesion.UsuarioActual != null && Sesion.UsuarioActual.PuedeVerBitacora;
@@ -40,9 +40,9 @@ namespace HotelZormat
 
                 dgvBitacora.DataSource = _bitacoraService.Listar(puedeVer);
             }
-            // Manejo de excepciones especÃ­ficas
+            // Manejo de excepciones especificas
 
-            catch (UnauthorizedAccessException ex) // Captura la excepciÃ³n de acceso denegado
+            catch (UnauthorizedAccessException ex) // Captura la excepcion de acceso denegado
             {
                 MessageBox.Show(ex.Message, "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
@@ -51,17 +51,17 @@ namespace HotelZormat
             {
                 MessageBox.Show("Error de formato: " + ex.Message, "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            catch (SqlException ex) // Captura la excepciÃ³n de SQL
+            catch (SqlException ex) // Captura la excepcion de SQL
             {
                 MessageBox.Show(ex.Message,"Base de datos",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-            catch (Exception ex) // Captura cualquier otra excepciÃ³n
+            catch (Exception ex) // Captura cualquier otra excepcion
             {
                 MessageBox.Show( ex.ToString(), "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
-        // Evento del botÃ³n de refrescar para recargar la bitÃ¡cora
+        // Evento del botón de refrescar para recargar la bitacora
         private void btnRefrescar_Click(object sender, EventArgs e)
         {
             CargarBitacora();

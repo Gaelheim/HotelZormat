@@ -1,4 +1,4 @@
-﻿// CÃ©dula: 40232840757
+﻿
 using HotelZormat.Negocio;
 using HotelZormat.Modelos;
 using HotelZormat.Negocio.Servicios;
@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace HotelZormat
 {
+    // 40232840757
     public partial class FrmLogin : Form
     {
         private readonly AutenticacionService _autenticacionService = new AutenticacionService();
@@ -18,17 +19,19 @@ namespace HotelZormat
             ThemeHelper.AplicarTema(this);
         }
 
+        // Evento que se dispara al hacer clic en el botón "Ingresar"
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             lblMensaje.Text = string.Empty;
 
+            // Validar que los campos de usuario y contraseña no estén vacíos
             try
             {
                 Usuario usuario = _autenticacionService.Login(txtUsuario.Text.Trim(), txtPassword.Text);
 
                 if (usuario == null)
                 {
-                    lblMensaje.Text = "Usuario o contraseÃ±a incorrectos.";
+                    lblMensaje.Text = "Usuario o contraseña incorrectos.";
                     return;
                 }
 
@@ -46,14 +49,15 @@ namespace HotelZormat
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexiÃ³n",
+                MessageBox.Show("Error de base de datos: " + ex.Message, "Error de conexión",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("OcurriÃ³ un error inesperado: " + ex.Message,
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
     }
 }
