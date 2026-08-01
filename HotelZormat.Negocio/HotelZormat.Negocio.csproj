@@ -45,6 +45,7 @@
     <Compile Include="Servicios\AutenticacionService.cs" />
     <Compile Include="Servicios\BitacoraService.cs" />
     <Compile Include="Servicios\CheckInOutService.cs" />
+    <Compile Include="Servicios\ClubMillasService.cs" />
     <Compile Include="Servicios\HabitacionService.cs" />
     <Compile Include="Servicios\HuespedService.cs" />
     <Compile Include="Servicios\ReporteService.cs" />

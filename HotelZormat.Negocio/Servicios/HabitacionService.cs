@@ -5,36 +5,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static HotelZormat.Modelos.HabitacionesOcupadas;
 
 namespace HotelZormat.Negocio.Servicios
 {
     // 40232840757
     public class HabitacionService
     {
+        // Repositorios para acceder a la base de datos
         private readonly HabitacionRepositorio _habitacionRepositorio = new HabitacionRepositorio();
         private readonly TipoHabitacionRepositorio _tipoHabitacionRepositorio = new TipoHabitacionRepositorio();
+
+        // Listar todos los tipos de habitación
         public List<TipoHabitacion> ListarTipos()
         {
             return _tipoHabitacionRepositorio.Listar();
         }
 
+        // Listar habitaciones filtrando por piso y estado
         public List<Habitacion> Listar(int? piso, string estado)
         {
             return _habitacionRepositorio.Listar(piso, estado);
         }
 
+        // Obtener una habitación por su ID
         public Habitacion ObtenerPorNumero(string numero)
         {
             return _habitacionRepositorio.ObtenerPorNumero(numero);
         }
 
+        // Crear una nueva habitación
         public void Crear(Habitacion habitacion)
         {
             ValidarDatos(habitacion);
             _habitacionRepositorio.Crear(habitacion);
         }
 
+        // Actualizar una habitación existente
         public void Actualizar(Habitacion habitacion)
         {
             ValidarDatos(habitacion);
@@ -58,6 +64,7 @@ namespace HotelZormat.Negocio.Servicios
             {
                 throw new System.UnauthorizedAccessException("Su rol no tiene permiso para eliminar habitaciones.");
             }
+
             _habitacionRepositorio.Eliminar(id);
         }
 
@@ -66,11 +73,12 @@ namespace HotelZormat.Negocio.Servicios
             _habitacionRepositorio.CambiarEstado(habitacionId, "Disponible");
         }
 
+        // Marcar sucia una habitación (por ejemplo, después de un check-out)
         private void ValidarDatos(Habitacion habitacion)
         {
             if (string.IsNullOrWhiteSpace(habitacion.Numero))
             {
-                throw new System.ArgumentException("El número de habitación es obligatorio.");
+                throw new System.ArgumentException("El número de habitación es obligatorio."); 
             }
             if (habitacion.Capacidad <= 0)
             {
