@@ -12,6 +12,7 @@ namespace HotelZormatDatos.Repositorios
     // 40232840757
     public class TemporadaRepositorio
     {
+        // Método para listar todas las temporadas desde la base de datos
         public List<Temporada> Listar()
         {
             var temporadas = new List<Temporada>();

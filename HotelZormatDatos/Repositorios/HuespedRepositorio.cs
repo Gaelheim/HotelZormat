@@ -13,10 +13,12 @@ namespace HotelZormatDatos.Repositorios
     // 40232840757
     public class HuespedRepositorio
     {
+        // Base de la consulta para evitar repetirla en cada método.
         private const string SelectBase =
             "SELECT Id, Nombre, Apellido, TipoDocumento, NumeroDocumento, Nacionalidad, Telefono, Email, FechaRegistro " +
             "FROM Huespedes ";
-
+        
+        //Mapea un registro de SqlDataReader a un objeto Huesped.
         private Huesped Mapear(SqlDataReader lector)
         {
             return new Huesped
@@ -33,6 +35,7 @@ namespace HotelZormatDatos.Repositorios
             };
         }
 
+        //Lista todos los huéspedes en la base de datos, ordenados por apellido y nombre.
         public List<Huesped> Listar()
         {
             var huespedes = new List<Huesped>();
@@ -76,6 +79,7 @@ namespace HotelZormatDatos.Repositorios
             return huespedes;
         }
 
+        //Obtiene un huésped por su ID.
         public Huesped ObtenerPorId(int id)
         {
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
@@ -94,6 +98,7 @@ namespace HotelZormatDatos.Repositorios
             return null;
         }
 
+        // Crea un nuevo huésped en la base de datos.
         public void Crear(Huesped huesped)
         {
             const string consulta =
@@ -109,6 +114,7 @@ namespace HotelZormatDatos.Repositorios
             }
         }
 
+        // Actualiza los datos de un huésped existente en la base de datos.
         public void Actualizar(Huesped huesped)
         {
             const string consulta =
@@ -126,6 +132,7 @@ namespace HotelZormatDatos.Repositorios
             }
         }
 
+        // Agrega los parámetros del objeto Huesped al comando SQL.
         private void AgregarParametros(SqlCommand comando, Huesped huesped)
         {
             comando.Parameters.AddWithValue("@Nombre", huesped.Nombre);
@@ -137,6 +144,7 @@ namespace HotelZormatDatos.Repositorios
             comando.Parameters.AddWithValue("@Email", (object)huesped.Email ?? DBNull.Value);
         }
 
+        // Elimina un huésped de la base de datos por su ID.
         public void Eliminar(int id)
         {
             const string consulta = "DELETE FROM Huespedes WHERE Id = @Id";
@@ -170,6 +178,24 @@ namespace HotelZormatDatos.Repositorios
                 }
             }
             return tabla;
+        }
+
+        // Obtiene el total de noches hospedadas por un huésped en todas sus estadías cerradas.
+        public int ObtenerTotalNochesHospedadas(int huespedId)
+        {
+            const string consulta = @"
+                SELECT COALESCE(SUM(r.Noches), 0)
+                FROM Estadias e
+                JOIN Reservas r ON r.Id = e.ReservaId
+                WHERE e.HuespedId = @HuespedId AND e.Estado = 'Cerrada'";
+
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            {
+                comando.Parameters.AddWithValue("@HuespedId", huespedId);
+                conexion.Open();
+                return Convert.ToInt32(comando.ExecuteScalar());
+            }
         }
     }
 }

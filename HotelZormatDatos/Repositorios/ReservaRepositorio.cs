@@ -41,6 +41,7 @@ namespace HotelZormatDatos.Repositorios
             return reserva;
         }
 
+        // Cambia el estado de la reserva (Confirmada, Cancelada, Finalizada).
         public void CambiarEstado(int reservaId, string nuevoEstado)
         {
             const string consulta = "UPDATE Reservas SET Estado = @Estado WHERE Id = @Id";
@@ -84,6 +85,7 @@ namespace HotelZormatDatos.Repositorios
             return null;
         }
 
+        // Mapea los datos del lector a un objeto Reserva, incluyendo nombres de huesped y número de habitación.
         private Reserva MapearConNombres(SqlDataReader lector)
         {
             return new Reserva
