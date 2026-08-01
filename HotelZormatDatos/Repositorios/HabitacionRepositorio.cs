@@ -10,13 +10,16 @@ using HotelZormat.Modelos;
 
 namespace HotelZormatDatos.Repositorios
 {
+    //40232840757
     public class HabitacionRepositorio
     {
+        // Base de la consulta para evitar repetirla en cada método.
         private const string SelectBase =
            "SELECT h.Id, h.Numero, h.TipoHabitacionId, th.Nombre AS TipoNombre, th.TarifaBase, " +
            "h.Piso, h.Capacidad, h.Estado " +
            "FROM Habitaciones h JOIN TiposHabitacion th ON th.Id = h.TipoHabitacionId ";
 
+        //Mapea un registro de SqlDataReader a un objeto Habitacion.
         private Habitacion Mapear(SqlDataReader lector)
         {
             return new Habitacion
@@ -66,6 +69,7 @@ namespace HotelZormatDatos.Repositorios
             }
         }
 
+        //Obtiene una habitación por su número, devuelve null si no existe.
         public Habitacion ObtenerPorNumero(string numero)
         {
             string consulta = SelectBase + " WHERE h.Numero = @Numero";
@@ -86,6 +90,7 @@ namespace HotelZormatDatos.Repositorios
             return null;
         }
 
+        //Obtiene una habitación por su Id, devuelve null si no existe.
         public Habitacion ObtenerPorId(int id)
         {
             string consulta = SelectBase + " WHERE h.Id = @Id";
@@ -106,6 +111,7 @@ namespace HotelZormatDatos.Repositorios
             return null;
         }
 
+        //Crea una nueva habitación en la base de datos.
         public void Crear(Habitacion habitacion)
         {
             const string consulta = "INSERT INTO Habitaciones (Numero, TipoHabitacionId, Piso, Capacidad, Estado) " +
@@ -144,6 +150,7 @@ namespace HotelZormatDatos.Repositorios
             }
         }
 
+        // Cambia el estado de una habitación (por ejemplo, de "Disponible" a "Ocupada").
         public void CambiarEstado(int habitacionId, string nuevoEstado)
         {
             const string consulta = "UPDATE Habitaciones SET Estado = @Estado WHERE Id = @Id";
@@ -159,6 +166,7 @@ namespace HotelZormatDatos.Repositorios
             }
         }
 
+        // Elimina una habitación de la base de datos por su Id.
         public void Eliminar(int id)
         {
             const string consulta = "DELETE FROM Habitaciones WHERE Id = @Id";

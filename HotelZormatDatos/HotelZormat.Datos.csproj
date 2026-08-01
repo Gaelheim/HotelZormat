@@ -45,6 +45,7 @@
     <Compile Include="Conexion\ConexionBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\BitacoraRepositorio.cs" />
+    <Compile Include="Repositorios\ClubMillasRepositorio.cs" />
     <Compile Include="Repositorios\EstadiaRepositorio.cs" />
     <Compile Include="Repositorios\FacturaRepositorio.cs" />
     <Compile Include="Repositorios\HabitacionRepositorio.cs" />

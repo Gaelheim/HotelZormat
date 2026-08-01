@@ -101,5 +101,32 @@ namespace HotelZormatDatos.Repositorios
             }
             return null;
         }
+
+        // Obtiene el HuespedId y Noches de una estadía específica para calcular millas.
+        public void ObtenerDatosMillas(int estadiaId, out int huespedId, out int noches)
+        {
+            huespedId = 0;
+            noches = 0;
+            const string consulta = @"
+                SELECT e.HuespedId, r.Noches 
+                FROM Estadias e 
+                JOIN Reservas r ON r.Id = e.ReservaId 
+                WHERE e.Id = @EstadiaId";
+
+            using (SqlConnection conexion = ConexionBD.ObtenerConexion())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            {
+                comando.Parameters.AddWithValue("@EstadiaId", estadiaId);
+                conexion.Open();
+                using (SqlDataReader lector = comando.ExecuteReader())
+                {
+                    if (lector.Read())
+                    {
+                        huespedId = Convert.ToInt32(lector["HuespedId"]);
+                        noches = Convert.ToInt32(lector["Noches"]);
+                    }
+                }
+            }
+        }
     }
 }
